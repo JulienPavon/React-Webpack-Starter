@@ -1,9 +1,8 @@
 var path = require('path');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  //context: path.resolve(__dirname, 'src/app'),
-
-  entry: path.join(__dirname, 'src/app/index.jsx'),
+  entry: path.resolve(__dirname, 'src/app/index.jsx'),
 
   output: {
     filename: '[name].js',
@@ -23,6 +22,17 @@ const config = {
         loaders: ["babel-loader"]
       }
     ]
+  },
+
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'My application',
+      template: path.resolve(__dirname, 'src/index.html')
+    })
+  ],
+
+  devServer: {
+    port: 3000
   }
 };
 
