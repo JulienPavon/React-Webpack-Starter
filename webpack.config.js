@@ -20,6 +20,11 @@ const config = {
         test: /\.jsx?$/,
         exclude: /node_modules/,
         loaders: ["babel-loader"]
+      },
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: ['babel-loader', 'eslint-loader']
       }
     ]
   },
