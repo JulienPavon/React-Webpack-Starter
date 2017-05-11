@@ -1,44 +1,50 @@
-var path = require('path');
-var HtmlWebpackPlugin = require('html-webpack-plugin');
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 const config = {
-  entry: path.resolve(__dirname, 'src/app/index.jsx'),
+  devtool: 'eval-source-map',
+
+  entry: path.resolve(__dirname, 'src/index.jsx'),
 
   output: {
     filename: '[name].js',
     path: path.resolve(__dirname, '.build'),
-    publicPath: '/'
+    publicPath: '/',
   },
 
   resolve: {
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.json'],
   },
-  
+
   module: {
     loaders: [
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loaders: ["babel-loader"]
+        loaders: ['babel-loader'],
       },
       {
         test: /\.jsx?$/,
         exclude: /node_modules/,
-        loader: ['babel-loader', 'eslint-loader']
-      }
-    ]
+        loader: ['babel-loader', 'eslint-loader'],
+      },
+      {
+        test: /\.scss$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+    ],
   },
 
   plugins: [
     new HtmlWebpackPlugin({
       title: 'My application',
-      template: path.resolve(__dirname, 'src/index.html')
-    })
+      template: path.resolve(__dirname, 'src/index.html'),
+    }),
   ],
 
   devServer: {
-    port: 3000
-  }
+    port: 3000,
+  },
 };
 
 module.exports = config;
